@@ -197,7 +197,10 @@ public abstract class SPARQL11SyntaxTest extends TestCase {
 					Enumeration<JarEntry> entries = jar.entries();
 					while (entries.hasMoreElements()) {
 						JarEntry file = entries.nextElement();
-						File f = new File(tmpDir + File.separator + file.getName());
+						File f = new File(tmpDir, file.getName());
+						if (!f.toPath().normalize().startsWith(tmpDir.toPath().normalize())) {
+							throw new IOException("Bad zip entry");
+						}
 						if (file.isDirectory()) {
 							f.mkdir();
 							continue;
