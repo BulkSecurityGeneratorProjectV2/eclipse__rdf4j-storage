@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Optional;
@@ -291,9 +292,7 @@ abstract class MemoryOverflowModel extends AbstractModel {
 				tmpDir.mkdirs();
 			}
 		}
-		File tmp = File.createTempFile(name, "");
-		tmp.delete();
-		tmp.mkdir();
+		File tmp = Files.createTempDirectory(name).toFile();
 		return tmp;
 	}
 
