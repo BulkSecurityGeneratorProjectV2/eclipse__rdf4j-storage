@@ -10,6 +10,7 @@ package org.eclipse.rdf4j.sail.nativerdf;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
 import java.util.NoSuchElementException;
 
 import org.eclipse.rdf4j.common.io.NioFile;
@@ -56,7 +57,7 @@ final class SequentialRecordCache extends RecordCache {
 		super(maxRecords);
 		this.recordSize = recordSize;
 
-		File cacheFile = File.createTempFile("txncache", ".dat", cacheDir);
+		File cacheFile = Files.createTempFile(cacheDir.toPath(), "txncache", ".dat").toFile();
 		nioFile = new NioFile(cacheFile);
 
 		// Write file header

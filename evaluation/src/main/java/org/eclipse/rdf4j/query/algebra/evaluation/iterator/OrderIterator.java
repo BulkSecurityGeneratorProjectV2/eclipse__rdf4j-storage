@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,7 +63,7 @@ public class OrderIterator extends DelayedIteration<BindingSet, QueryEvaluationE
 		}
 
 		public SerializedQueue(String prefix, File directory) throws IOException {
-			file = File.createTempFile(prefix, "", directory);
+			file = Files.createTempFile(directory.toPath(), prefix, "").toFile();
 			output = new ObjectOutputStream(new FileOutputStream(file));
 		}
 

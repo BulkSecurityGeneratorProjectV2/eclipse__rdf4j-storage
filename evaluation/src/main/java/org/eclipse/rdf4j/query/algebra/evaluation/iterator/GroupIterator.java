@@ -10,6 +10,7 @@ package org.eclipse.rdf4j.query.algebra.evaluation.iterator;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -103,7 +104,7 @@ public class GroupIterator extends CloseableIteratorIteration<BindingSet, QueryE
 
 		if (this.iterationCacheSyncThreshold > 0) {
 			try {
-				this.tempFile = File.createTempFile("group-eval", null);
+				this.tempFile = Files.createTempFile("group-eval", null).toFile();
 			} catch (IOException e) {
 				throw new QueryEvaluationException("could not initialize temp db", e);
 			}
